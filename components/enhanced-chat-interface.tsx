@@ -2,7 +2,7 @@
 
 import { useState, useRef, useEffect } from 'react';
 import { useChat } from 'ai/react';
-import { SendHorizonal, Image as ImageIcon, Paperclip, Plus, MessageSquare, Sparkles, Coins, Mic, GraduationCap, User, Bot } from 'lucide-react';
+import { SendHorizonal, Image as ImageIcon, Paperclip, Plus, MessageSquare, Sparkles, Coins, Mic, GraduationCap, User, Bot, Wand2 } from 'lucide-react';
 import ReactMarkdown from 'react-markdown';
 import { createClient } from '@/lib/supabase/client';
 import { ChatCreditsEstimator, UsageIndicator } from './credits-display';
@@ -274,49 +274,24 @@ export default function EnhancedChatInterface({
       <div className={`flex-1 flex flex-col ${messages.length === 0 ? 'items-center justify-center' : ''}`}>
         {/* Chat Header - ChatGPT Style - Only show when there are messages */}
         {messages.length > 0 && (
-        <div className="bg-white border-b border-gray-200 px-6 py-3 flex items-center justify-between sticky top-0 z-10">
+        <div className="bg-white border-b border-gray-200 px-6 py-4 flex items-center justify-between sticky top-0 z-10 shadow-sm">
           <div className="flex items-center gap-3">
-            <div className="w-10 h-10 bg-gradient-to-br from-orange-500 to-red-600 rounded-lg flex items-center justify-center">
+            <div className="w-10 h-10 bg-gradient-to-br from-orange-500 to-red-600 rounded-lg flex items-center justify-center shadow-md">
               <Sparkles className="w-6 h-6 text-white" />
             </div>
             <div>
-              <h1 className="text-lg font-semibold text-gray-900">JumpStudy AI</h1>
-              <p className="text-xs text-gray-500">
-                {tutorMode ? '🎓 Tutor Mode Active' : 'I have no limits'}
+              <h1 className="text-lg font-bold text-gray-900">JumpStudy AI</h1>
+              <p className="text-xs text-gray-600 font-medium">
+                {tutorMode ? '🎓 Tutor Mode Active' : 'Powered by Advanced AI'}
               </p>
             </div>
           </div>
 
           <div className="flex items-center gap-2">
-            <button
-              onClick={() => setTutorMode(!tutorMode)}
-              className={`flex items-center gap-2 px-3 py-2 rounded-lg transition-all text-sm font-medium ${
-                tutorMode
-                  ? 'bg-gradient-to-r from-orange-100 to-red-100 text-orange-700 border-2 border-orange-300'
-                  : 'bg-gray-100 text-gray-700 hover:bg-gray-200'
-              }`}
-            >
-              <GraduationCap className="w-4 h-4" />
-              Tutor Mode
-            </button>
-            <button
-              onClick={() => setShowConversationMode(!showConversationMode)}
-              className={`flex items-center gap-2 px-3 py-2 rounded-lg transition-all text-sm font-medium ${
-                showConversationMode
-                  ? 'bg-gradient-to-r from-blue-100 to-purple-100 text-blue-700 border-2 border-blue-300'
-                  : 'bg-gray-100 text-gray-700 hover:bg-gray-200'
-              }`}
-            >
-              <Mic className="w-4 h-4" />
-              Conversation
-            </button>
-            <button
-              onClick={() => setShowImagePrompt(!showImagePrompt)}
-              className="flex items-center gap-2 px-3 py-2 bg-gray-100 text-gray-700 rounded-lg hover:bg-gray-200 transition-colors text-sm font-medium"
-            >
-              <ImageIcon className="w-4 h-4" />
-              Image
-            </button>
+            <div className="flex items-center gap-2 px-4 py-2 bg-gradient-to-r from-green-100 to-emerald-100 border-2 border-green-300 rounded-lg">
+              <Wand2 className="w-4 h-4 text-green-700" />
+              <span className="text-sm font-semibold text-green-700">Auto-Humanizer Active</span>
+            </div>
           </div>
         </div>
         )}
