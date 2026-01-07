@@ -282,7 +282,7 @@ export default function InstrumentTuner({ onClose }: InstrumentTunerProps) {
             </p>
             <button
               onClick={startListening}
-              className="bg-gradient-to-r from-green-600 to-emerald-600 text-white px-8 py-4 rounded-xl font-bold hover:from-green-700 hover:to-emerald-700 transition-all flex items-center gap-2 mx-auto"
+              className="bg-gradient-to-r from-orange-500 to-red-500 text-white px-8 py-4 rounded-xl font-bold hover:from-orange-600 hover:to-red-600 transition-all flex items-center gap-2 mx-auto"
             >
               <Mic className="w-5 h-5" />
               Start Listening

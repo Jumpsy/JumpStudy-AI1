@@ -276,7 +276,7 @@ export default function EnhancedChatInterface({
         {messages.length > 0 && (
         <div className="bg-white border-b border-gray-200 px-6 py-3 flex items-center justify-between sticky top-0 z-10">
           <div className="flex items-center gap-3">
-            <div className="w-10 h-10 bg-gradient-to-br from-emerald-400 to-cyan-500 rounded-lg flex items-center justify-center">
+            <div className="w-10 h-10 bg-gradient-to-br from-orange-500 to-red-600 rounded-lg flex items-center justify-center">
               <Sparkles className="w-6 h-6 text-white" />
             </div>
             <div>
@@ -292,7 +292,7 @@ export default function EnhancedChatInterface({
               onClick={() => setTutorMode(!tutorMode)}
               className={`flex items-center gap-2 px-3 py-2 rounded-lg transition-all text-sm font-medium ${
                 tutorMode
-                  ? 'bg-gradient-to-r from-emerald-100 to-cyan-100 text-emerald-700 border-2 border-emerald-300'
+                  ? 'bg-gradient-to-r from-orange-100 to-red-100 text-orange-700 border-2 border-orange-300'
                   : 'bg-gray-100 text-gray-700 hover:bg-gray-200'
               }`}
             >
@@ -325,7 +325,7 @@ export default function EnhancedChatInterface({
         {messages.length === 0 && (
           <div className="flex flex-col items-center justify-center w-full max-w-3xl px-6 space-y-8">
             <div className="flex flex-col items-center">
-              <div className="w-20 h-20 bg-gradient-to-br from-emerald-400 to-cyan-500 rounded-2xl flex items-center justify-center mb-6">
+              <div className="w-20 h-20 bg-gradient-to-br from-orange-500 to-red-600 rounded-2xl flex items-center justify-center mb-6">
                 <Sparkles className="w-11 h-11 text-white" />
               </div>
               <h1 className="text-4xl font-bold text-gray-900 mb-4 text-center">
@@ -356,7 +356,7 @@ export default function EnhancedChatInterface({
                   accept=".txt,.pdf,.doc,.docx"
                 />
 
-                <div className="relative flex items-end gap-2 bg-white border-2 border-gray-300 rounded-3xl shadow-lg hover:border-gray-400 focus-within:border-emerald-500 transition-colors">
+                <div className="relative flex items-end gap-2 bg-white border-2 border-gray-300 rounded-3xl shadow-lg hover:border-gray-400 focus-within:border-orange-500 transition-colors">
                   <button
                     type="button"
                     onClick={() => fileInputRef.current?.click()}
@@ -397,7 +397,7 @@ export default function EnhancedChatInterface({
                   <button
                     type="submit"
                     disabled={isLoading || !input.trim() || !canAfford}
-                    className="p-3 mr-2 mb-2 bg-gradient-to-r from-emerald-500 to-cyan-500 text-white rounded-full hover:from-emerald-600 hover:to-cyan-600 disabled:from-gray-300 disabled:to-gray-300 disabled:cursor-not-allowed transition-all"
+                    className="p-3 mr-2 mb-2 bg-gradient-to-r from-orange-500 to-red-500 text-white rounded-full hover:from-orange-600 hover:to-red-600 disabled:from-gray-300 disabled:to-gray-300 disabled:cursor-not-allowed transition-all"
                   >
                     <SendHorizonal className="w-5 h-5" />
                   </button>
@@ -443,7 +443,7 @@ export default function EnhancedChatInterface({
                       <User className="w-5 h-5 text-white" />
                     </div>
                   ) : (
-                    <div className="w-8 h-8 rounded-full bg-gradient-to-br from-emerald-400 to-cyan-500 flex items-center justify-center">
+                    <div className="w-8 h-8 rounded-full bg-gradient-to-br from-orange-500 to-red-600 flex items-center justify-center">
                       <Bot className="w-5 h-5 text-white" />
                     </div>
                   )}
@@ -466,13 +466,13 @@ export default function EnhancedChatInterface({
           {isLoading && (
             <div className="px-6 py-6 bg-gray-50 border-b border-gray-100">
               <div className="max-w-3xl mx-auto flex gap-6">
-                <div className="w-8 h-8 rounded-full bg-gradient-to-br from-emerald-400 to-cyan-500 flex items-center justify-center flex-shrink-0">
+                <div className="w-8 h-8 rounded-full bg-gradient-to-br from-orange-500 to-red-600 flex items-center justify-center flex-shrink-0">
                   <Bot className="w-5 h-5 text-white" />
                 </div>
                 <div className="flex items-center gap-2">
-                  <div className="w-2 h-2 bg-emerald-500 rounded-full animate-bounce" />
-                  <div className="w-2 h-2 bg-cyan-500 rounded-full animate-bounce delay-100" />
-                  <div className="w-2 h-2 bg-emerald-500 rounded-full animate-bounce delay-200" />
+                  <div className="w-2 h-2 bg-orange-500 rounded-full animate-bounce" />
+                  <div className="w-2 h-2 bg-red-500 rounded-full animate-bounce delay-100" />
+                  <div className="w-2 h-2 bg-orange-500 rounded-full animate-bounce delay-200" />
                 </div>
               </div>
             </div>
@@ -557,7 +557,7 @@ export default function EnhancedChatInterface({
                 accept=".txt,.pdf,.doc,.docx"
               />
 
-              <div className="relative flex items-end gap-2 bg-white border border-gray-300 rounded-3xl shadow-sm hover:border-gray-400 focus-within:border-emerald-500 transition-colors">
+              <div className="relative flex items-end gap-2 bg-white border border-gray-300 rounded-3xl shadow-sm hover:border-gray-400 focus-within:border-orange-500 transition-colors">
                 <button
                   type="button"
                   onClick={() => fileInputRef.current?.click()}
@@ -598,7 +598,7 @@ export default function EnhancedChatInterface({
                 <button
                   type="submit"
                   disabled={isLoading || !input.trim() || !canAfford}
-                  className="p-3 mr-2 mb-2 bg-gradient-to-r from-emerald-500 to-cyan-500 text-white rounded-full hover:from-emerald-600 hover:to-cyan-600 disabled:from-gray-300 disabled:to-gray-300 disabled:cursor-not-allowed transition-all"
+                  className="p-3 mr-2 mb-2 bg-gradient-to-r from-orange-500 to-red-500 text-white rounded-full hover:from-orange-600 hover:to-red-600 disabled:from-gray-300 disabled:to-gray-300 disabled:cursor-not-allowed transition-all"
                 >
                   <SendHorizonal className="w-5 h-5" />
                 </button>

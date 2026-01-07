@@ -238,7 +238,7 @@ export default function MusicTabsInterface({
             <div className="flex items-center gap-3">
               <Link
                 href="/tuner"
-                className="flex items-center gap-2 px-4 py-2 bg-gradient-to-r from-blue-600 to-cyan-600 text-white rounded-xl font-semibold hover:from-blue-700 hover:to-cyan-700 transition-all shadow-lg"
+                className="flex items-center gap-2 px-4 py-2 bg-gradient-to-r from-orange-500 to-red-500 text-white rounded-xl font-semibold hover:from-orange-600 hover:to-red-600 transition-all shadow-lg"
               >
                 <Volume2 className="w-5 h-5" />
                 Tuner
