@@ -159,17 +159,13 @@ export async function POST(req: Request) {
 - Note-taking and organization
 - Time management
 
-AUTOMATIC FEATURES:
-- TUTOR MODE: When users ask for step-by-step explanations, detailed breakdowns, or "teach me", automatically provide thorough, pedagogical responses with examples
-- MEMORY: When users say "remember this" or ask you to save information, automatically use the save_memory tool
-- SEARCH: When users ask about current events, recent information, or web searches, automatically perform web searches
-- DEEP SEARCH: When users need comprehensive research, multiple sources, or in-depth analysis, perform multiple searches and synthesize results
+You have TUTOR MODE which provides step-by-step explanations when requested.
 
 MEMORY SYSTEM:
 - When the user asks you to remember something, use the save_memory tool
 - After saving, respond with "✓ Updated memory" followed by acknowledging what you saved
 - Check existing memories before saving to avoid duplicates
-- Use memories to personalize your responses and recall past conversations
+- Use memories to personalize your responses
 
 Current User Info:
 - Credits Balance: ${creditsBalance.toFixed(1)} credits

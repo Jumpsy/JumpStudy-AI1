@@ -27,6 +27,7 @@ export default function EnhancedChatInterface({
   const [creditsBalance, setCreditsBalance] = useState(initialCredits);
   const [lastMessageCredits, setLastMessageCredits] = useState<number | null>(null);
   const [showConversationMode, setShowConversationMode] = useState(false);
+  const [tutorMode, setTutorMode] = useState(false);
   const fileInputRef = useRef<HTMLInputElement>(null);
   const messagesEndRef = useRef<HTMLDivElement>(null);
 
@@ -188,7 +189,7 @@ export default function EnhancedChatInterface({
   return (
     <div className="flex h-screen bg-gray-50">
       {/* Sidebar */}
-      <div className="w-80 bg-white border-r border-gray-200 flex flex-col animate-slide-in-left">
+      <div className="w-80 bg-white border-r border-gray-200 flex flex-col">
         {/* Sidebar Header with Credits */}
         <div className="p-4 border-b border-gray-200">
           <div className="flex items-center justify-between mb-4">
@@ -273,22 +274,56 @@ export default function EnhancedChatInterface({
       <div className={`flex-1 flex flex-col ${messages.length === 0 ? 'items-center justify-center' : ''}`}>
         {/* Chat Header - ChatGPT Style - Only show when there are messages */}
         {messages.length > 0 && (
-        <div className="bg-white border-b border-gray-200 px-6 py-3 flex items-center justify-center sticky top-0 z-10">
+        <div className="bg-white border-b border-gray-200 px-6 py-3 flex items-center justify-between sticky top-0 z-10">
           <div className="flex items-center gap-3">
             <div className="w-10 h-10 bg-gradient-to-br from-orange-500 to-red-600 rounded-lg flex items-center justify-center">
               <Sparkles className="w-6 h-6 text-white" />
             </div>
             <div>
               <h1 className="text-lg font-semibold text-gray-900">JumpStudy AI</h1>
-              <p className="text-xs text-gray-500">I have no limits</p>
+              <p className="text-xs text-gray-500">
+                {tutorMode ? '🎓 Tutor Mode Active' : 'I have no limits'}
+              </p>
             </div>
+          </div>
+
+          <div className="flex items-center gap-2">
+            <button
+              onClick={() => setTutorMode(!tutorMode)}
+              className={`flex items-center gap-2 px-3 py-2 rounded-lg transition-all text-sm font-medium ${
+                tutorMode
+                  ? 'bg-gradient-to-r from-orange-100 to-red-100 text-orange-700 border-2 border-orange-300'
+                  : 'bg-gray-100 text-gray-700 hover:bg-gray-200'
+              }`}
+            >
+              <GraduationCap className="w-4 h-4" />
+              Tutor Mode
+            </button>
+            <button
+              onClick={() => setShowConversationMode(!showConversationMode)}
+              className={`flex items-center gap-2 px-3 py-2 rounded-lg transition-all text-sm font-medium ${
+                showConversationMode
+                  ? 'bg-gradient-to-r from-blue-100 to-purple-100 text-blue-700 border-2 border-blue-300'
+                  : 'bg-gray-100 text-gray-700 hover:bg-gray-200'
+              }`}
+            >
+              <Mic className="w-4 h-4" />
+              Conversation
+            </button>
+            <button
+              onClick={() => setShowImagePrompt(!showImagePrompt)}
+              className="flex items-center gap-2 px-3 py-2 bg-gray-100 text-gray-700 rounded-lg hover:bg-gray-200 transition-colors text-sm font-medium"
+            >
+              <ImageIcon className="w-4 h-4" />
+              Image
+            </button>
           </div>
         </div>
         )}
 
         {/* Centered Welcome Screen with Input - Only show when no messages */}
         {messages.length === 0 && (
-          <div className="flex flex-col items-center justify-center w-full max-w-3xl px-6 space-y-8 animate-scale-in">
+          <div className="flex flex-col items-center justify-center w-full max-w-3xl px-6 space-y-8">
             <div className="flex flex-col items-center">
               <div className="w-20 h-20 bg-gradient-to-br from-orange-500 to-red-600 rounded-2xl flex items-center justify-center mb-6">
                 <Sparkles className="w-11 h-11 text-white" />
@@ -297,7 +332,9 @@ export default function EnhancedChatInterface({
                 How can I help you today?
               </h1>
               <p className="text-gray-500 text-center text-lg">
-                Ask me anything to get started
+                {tutorMode
+                  ? 'I\'m in Tutor Mode - I\'ll guide you step-by-step through any topic.'
+                  : 'Ask me anything to get started'}
               </p>
             </div>
 
@@ -333,7 +370,9 @@ export default function EnhancedChatInterface({
                     onChange={handleInputChange}
                     placeholder={
                       canAfford
-                        ? 'Message JumpStudy AI...'
+                        ? tutorMode
+                          ? 'Ask me to explain anything step-by-step...'
+                          : 'Message JumpStudy AI...'
                         : 'Insufficient credits - please buy more'
                     }
                     disabled={!canAfford || isLoading}
@@ -394,7 +433,7 @@ export default function EnhancedChatInterface({
               key={index}
               className={`group px-6 py-6 ${
                 message.role === 'user' ? 'bg-white' : 'bg-gray-50'
-              } border-b border-gray-100 animate-fade-in`}
+              } border-b border-gray-100`}
             >
               <div className="max-w-3xl mx-auto flex gap-6">
                 {/* Avatar */}
@@ -425,7 +464,7 @@ export default function EnhancedChatInterface({
           ))}
 
           {isLoading && (
-            <div className="px-6 py-6 bg-gray-50 border-b border-gray-100 animate-fade-in">
+            <div className="px-6 py-6 bg-gray-50 border-b border-gray-100">
               <div className="max-w-3xl mx-auto flex gap-6">
                 <div className="w-8 h-8 rounded-full bg-gradient-to-br from-orange-500 to-red-600 flex items-center justify-center flex-shrink-0">
                   <Bot className="w-5 h-5 text-white" />
@@ -500,8 +539,8 @@ export default function EnhancedChatInterface({
 
         {/* Input Area - ChatGPT Style - Only show when there are messages */}
         {messages.length > 0 && (
-        <div className="bg-white px-6 py-6 border-t border-gray-200 animate-slide-up">
-          <div className="max-w-4xl mx-auto">
+        <div className="bg-white px-6 py-6 border-t border-gray-200">
+          <div className="max-w-3xl mx-auto">
             {/* Credits Estimator */}
             {input.trim() && (
               <div className="mb-3">
@@ -532,7 +571,9 @@ export default function EnhancedChatInterface({
                   onChange={handleInputChange}
                   placeholder={
                     canAfford
-                      ? 'Message JumpStudy AI...'
+                      ? tutorMode
+                        ? 'Ask me to explain anything step-by-step...'
+                        : 'Message JumpStudy AI...'
                       : 'Insufficient credits - please buy more'
                   }
                   disabled={!canAfford || isLoading}
