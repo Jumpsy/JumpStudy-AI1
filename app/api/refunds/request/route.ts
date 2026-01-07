@@ -1,12 +1,20 @@
-import { openai } from '@ai-sdk/openai';
+import { createOpenAI } from '@ai-sdk/openai';
 import { generateObject } from 'ai';
 import { z } from 'zod';
 import { createClient } from '@/lib/supabase/server';
 import Stripe from 'stripe';
 
-const stripe = new Stripe(process.env.STRIPE_SECRET_KEY!, {
-  apiVersion: '2025-02-24.acacia',
-});
+const getStripe = () => {
+  return new Stripe(process.env.STRIPE_SECRET_KEY || '', {
+    apiVersion: '2025-02-24.acacia',
+  });
+};
+
+const getOpenAI = () => {
+  return createOpenAI({
+    apiKey: process.env.OPENAI_API_KEY || '',
+  });
+};
 
 const RefundDecisionSchema = z.object({
   decision: z.enum(['approved', 'partial', 'rejected']),
@@ -18,6 +26,7 @@ const RefundDecisionSchema = z.object({
 
 export async function POST(req: Request) {
   try {
+    const stripe = getStripe();
     const { reason, subscriptionId } = await req.json();
 
     if (!reason || !subscriptionId) {
@@ -84,6 +93,7 @@ export async function POST(req: Request) {
     const amountPaid = subscription.items.data[0]?.price.unit_amount || 0;
 
     // AI analyzes the refund request
+    const openai = getOpenAI();
     const aiDecision = await generateObject({
       model: openai('gpt-4o'),
       schema: RefundDecisionSchema,

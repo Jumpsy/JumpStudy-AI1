@@ -204,9 +204,11 @@ export default function ChatInterface({ userId, initialCredits }: ChatInterfaceP
                       {message.role === 'user' ? '👤' : <Sparkles className="w-5 h-5" />}
                     </div>
                     <div className="flex-1">
-                      <ReactMarkdown className="prose prose-invert max-w-none">
-                        {message.content}
-                      </ReactMarkdown>
+                      <div className="prose prose-invert max-w-none">
+                        <ReactMarkdown>
+                          {message.content}
+                        </ReactMarkdown>
+                      </div>
                     </div>
                   </div>
                 </div>

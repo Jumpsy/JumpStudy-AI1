@@ -1,9 +1,11 @@
 import { createClient } from '@/lib/supabase/server';
 import OpenAI from 'openai';
 
-const openai = new OpenAI({
-  apiKey: process.env.OPENAI_API_KEY,
-});
+const getOpenAI = () => {
+  return new OpenAI({
+    apiKey: process.env.OPENAI_API_KEY || '',
+  });
+};
 
 export async function POST(req: Request) {
   try {
@@ -30,6 +32,7 @@ export async function POST(req: Request) {
     }
 
     // Transcribe with Whisper API
+    const openai = getOpenAI();
     const transcription = await openai.audio.transcriptions.create({
       file: audioFile,
       model: 'whisper-1',

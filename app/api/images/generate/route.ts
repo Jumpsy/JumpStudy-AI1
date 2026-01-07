@@ -5,9 +5,11 @@ import OpenAI from 'openai';
 
 export const runtime = 'edge';
 
-const openai = new OpenAI({
-  apiKey: process.env.OPENAI_API_KEY,
-});
+const getOpenAI = () => {
+  return new OpenAI({
+    apiKey: process.env.OPENAI_API_KEY || '',
+  });
+};
 
 export async function POST(req: Request) {
   try {
@@ -74,6 +76,7 @@ export async function POST(req: Request) {
     }
 
     // Generate image with DALL-E 3
+    const openai = getOpenAI();
     const response = await openai.images.generate({
       model: 'dall-e-3',
       prompt: prompt,
